@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -72,6 +72,7 @@ namespace assignment2
 
 
 
+            
             #region LINQ - Aggregate Operators
 
             //// 1.Uses Count to get the number of odd numbers in the array
@@ -226,45 +227,254 @@ namespace assignment2
 
 
 
-            //10.Get the cheapest price among each category's products
+            ////10.Get the cheapest price among each category's products
 
-            var res = ProductList.GroupBy(x => x.Category)
-                                 .Select(x =>
-                                   x.Where(p=>p.UnitPrice==x.Min(g=>g.UnitPrice)).Select(p => new
-                                   {
-                                       x.Key,
-                                       p.ProductName
-                                   ,
-                                       CheapestPrice = x.Min(x => x.UnitPrice)
-                                   }).FirstOrDefault()
+            //var res = ProductList.GroupBy(x => x.Category)
+            //                     .Select(x =>
+            //                       x.Where(p=>p.UnitPrice==x.Min(g=>g.UnitPrice)).Select(p => new
+            //                       {
+            //                           x.Key,
+            //                           p.ProductName
+            //                       ,
+            //                           CheapestPrice = x.Min(x => x.UnitPrice)
+            //                       }).FirstOrDefault()
 
-                                 );
-            foreach ( var item in res )
-                Console.WriteLine(item);
-
-
+            //                     );
+            //foreach ( var item in res )
+            //    Console.WriteLine(item);
 
 
+            ////11. Get the products with the cheapest price in each category (Use Let)
+            //var result = ProductList.GroupBy(x => x.Category)
+            //                       .Select(g =>
+            //                           g.Where(p => p.UnitPrice == g.Min(p => p.UnitPrice))
+            //                            .Select(p => new
+            //                            {
+            //                                g.Key,
+            //                                p.ProductName,
+            //                                CheapestPrice = g.Min(p => p.UnitPrice)
+            //                            }).FirstOrDefault()
+            //                       );
 
-
-
-
-
-
-
-
-
-//11.Get the products with the cheapest price in each category(Use Let)
-//12.Get the most expensive price among each category's products.
-//13.Get the products with the most expensive price in each category.
-//14.Get the average price of each category's products.
-
+            //foreach (var item in result)
+            //    Console.WriteLine(item);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+            ////12. Get the most expensive price among each category's products.
+            //var result = ProductList.GroupBy(x => x.Category)
+            //                        .Select(g => new
+            //                        {
+            //                            g.Key,
+            //                            MostExpensivePrice = g.Max(p => p.UnitPrice)
+            //                        });
+
+            // foreach (var item in result)
+            //     Console.WriteLine(item);
+
+
+
+
+            ////13. Get the products with the most expensive price in each category.
+            //var result = ProductList.GroupBy(x => x.Category)
+            //                        .Select(g =>
+            //                            g.Where(p => p.UnitPrice == g.Max(p => p.UnitPrice))
+            //                             .Select(p => new
+            //                             {
+            //                                 g.Key,
+            //                                 p.ProductName,
+            //                                 MostExpensivePrice = g.Max(p => p.UnitPrice)
+            //                             }).FirstOrDefault()
+            //                        );
+
+            // foreach (var item in result)
+            //     Console.WriteLine(item);
+
+
+
+
+
+
+
+
+
+
+
+
+            ////14. Get the average price of each category's products.
+            //var result = ProductList.GroupBy(x => x.Category)
+            //                       .Select(g => new
+            //                       {
+            //                           g.Key,
+            //                           AvgPrice = g.Average(p => p.UnitPrice)
+            //                       });
+
+            //foreach (var item in result)
+            //    Console.WriteLine(item);
 
 
             #endregion
+
+
+
+
+            #region LINQ - Set Operators
+
+            ////1. Find the unique Category names from Product List
+            //var result = ProductList.Select(p => p.Category)
+            //                          .Distinct();
+
+            // foreach (var item in result)
+            //     Console.WriteLine(item);
+
+
+
+
+
+
+
+
+            ////2. Produce a Sequence containing the unique first letter from both product and customer names.
+            //var result = ProductList.Select(p => p.ProductName[0])
+            //                          .Union(CustomerList.Select(c => c.CustomerName[0]));
+
+            // foreach (var item in result)
+            //     Console.WriteLine(item);
+
+
+
+
+            ////3. Create one sequence that contains the common first letter from both product and customer names.
+            //var result = ProductList.Select(p => p.ProductName[0])
+            //                         .Intersect(CustomerList.Select(c => c.CustomerName[0]));
+
+            //foreach (var item in result)
+            //    Console.WriteLine(item);
+
+
+
+
+            ////4. Create one sequence that contains the first letters of product names that are not also first letters of customer names.
+            //var result = ProductList.Select(p => p.ProductName[0])
+            //                          .Except(CustomerList.Select(c => c.CustomerName[0]));
+
+            // foreach (var item in result)
+            //     Console.WriteLine(item);
+
+
+
+
+            ////5. Create one sequence that contains the last Three Characters in each name of all customers and products, including any duplicates
+            //var result = ProductList.Select(p => p.ProductName.Substring(Math.Max(0, p.ProductName.Length - 3)))
+            //                         .Concat(CustomerList.Select(c => c.CustomerName.Substring(Math.Max(0, c.CustomerName.Length - 3))));
+
+            //foreach (var item in result)
+            //    Console.WriteLine(item);
+
+            #endregion
+
+
+
+            #region LINQ - Quantifiers
+
+            ////1. Determine if any of the words in dictionary_english.txt contain the substring 'ei'.
+            //var result = words.Any(w => w.Contains("ei"));
+            //Console.WriteLine(resultBool);
+
+
+
+
+            ////2. Return a grouped list of products only for categories that have at least one product that is out of stock.
+            //var result = ProductList.GroupBy(p => p.Category)
+            //                       .Where(g => g.Any(p => p.UnitsInStock == 0))
+            //                       .SelectMany(g => g.Select(p => new
+            //                       {
+            //                           g.Key,
+            //                           p.ProductName,
+            //                           p.UnitsInStock
+            //                       }));
+
+            //foreach (var item in result)
+            //    Console.WriteLine(item);
+
+
+
+
+            ////3. Return a grouped list of products only for categories that have all of their products in stock.
+            //var result = ProductList.GroupBy(p => p.Category)
+            //                       .Where(g => g.All(p => p.UnitsInStock > 0))
+            //                       .SelectMany(g => g.Select(p => new
+            //                       {
+            //                           g.Key,
+            //                           p.ProductName,
+            //                           p.UnitsInStock
+            //                       }));
+
+            //foreach (var item in result)
+            //    Console.WriteLine(item);
+
+            #endregion
+
+
+            #region LINQ – Grouping Operators
+
+            ////1. Use group by to partition a list of numbers by their remainder when divided by 5
+            List<int> numbers = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+
+            //var result = numbers.GroupBy(n => n % 5)
+            //                   .Select(g => new
+            //                   {
+            //                       Remainder = g.Key,
+            //                       Numbers = g.ToList()
+            //                   });
+
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine($"Remainder {item.Remainder}");
+            //}
+
+
+
+
+            ////2. Use group by to partition a list of words by their first letter. (dictionary_english.txt)
+           //var result = words.GroupBy(w => w[0])
+           //                  .Select(g => new
+           //                  {
+           //                      FirstLetter = g.Key,
+           //                      Words = g.ToList()
+           //                  });
+
+           // foreach (var item in result)
+           // {
+           //     Console.WriteLine($"Letter {item.FirstLetter}: Count={item.Words.Count}");
+           // }
+
+
+
+
+            ////3. Group By with a custom comparer that matches words that are consists of the same Characters Together
+            //string[] Arr = { "from", "salt", "earn", "last", "near", "form" };
+
+            //var result = Arr.GroupBy(w => String.Concat(w.OrderBy(c => c)));
+
+            //foreach (var group in result)
+            //{
+            //    Console.WriteLine($"Group {group.Key}");
+            //}
+
+            #endregion
+
 
 
 
